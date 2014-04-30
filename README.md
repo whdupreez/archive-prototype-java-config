@@ -1,4 +1,1 @@
-prototype-java-config
-=====================
-
-Java Application Configuration Utilities
+http://whdupreez.github.io/prototype-java-config/
