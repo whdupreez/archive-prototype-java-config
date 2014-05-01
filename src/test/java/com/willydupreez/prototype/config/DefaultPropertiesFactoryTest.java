@@ -1,9 +1,10 @@
 package com.willydupreez.prototype.config;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-import org.junit.Assert;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class DefaultPropertiesFactoryTest {
 
 	@Before
 	public void before() {
-		factory = new DefaultPropertiesFactory();
+		factory = new DefaultPropertiesFactory(TestTools.getResourceDirectory());
 	}
 
 	@Test
@@ -25,16 +26,41 @@ public class DefaultPropertiesFactoryTest {
 	}
 
 	@Test
-	public void test_ClasspathProperties() {
-		ClasspathProperties props = factory.create(ClasspathProperties.class);
-		assertThat(props.getPropertyOne(), is("cpOne"));
-		assertThat(props.getPropertyTwo(), is("cpTwo"));
-		assertThat(props.getPropertyThree(), is("cpThree"));
+	public void test_FileBasedProperties() {
+		FileBasedProperties props = factory.create(FileBasedProperties.class);
+		assertThat(props.isBoolVal(), is(true));
+		assertThat(props.getoBoolVal(), is(true));
+		assertThat(props.getIntVal(), is(321));
+		assertThat(props.getOIntVal(), is(123));
+		assertThat(props.getLongVal(), is(54321L));
+		assertThat(props.getoLongVal(), is(12345L));
+		assertThat(props.getStrVal(), is("A string"));
+		assertThat(props.getListOfStrings(), is(Arrays.asList("str1", "str2", "str3")));
 	}
 
-	@Test
-	public void test_InvalidPropertiesClassname() {
-		assertTrue(false);
+	@Test(expected = ConfigurationException.class)
+	public void test_MissingFileProperties() {
+		factory.create(MissingFileProperties.class);
+	}
+
+	@Test(expected = ConfigurationException.class)
+	public void test_MissingFieldProperties() {
+		factory.create(MissingFieldProperties.class);
+	}
+
+	@Test(expected = ConfigurationException.class)
+	public void test_NoConstructorProperties() {
+		factory.create(NoConstructorProperties.class);
+	}
+
+	@Test(expected = ConfigurationException.class)
+	public void test_InvalidClassNameProps() {
+		factory.create(InvalidNameProps.class);
+	}
+
+	@Test(expected = ConfigurationException.class)
+	public void test_UnsupportedType() {
+		factory.create(UnsupportedTypeProperties.class);
 	}
 
 }
