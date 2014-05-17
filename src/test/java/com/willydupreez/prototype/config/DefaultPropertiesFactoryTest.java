@@ -8,13 +8,21 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.willydupreez.prototype.config.test.DefaultTestProperties;
+import com.willydupreez.prototype.config.test.FileBasedProperties;
+import com.willydupreez.prototype.config.test.InvalidNameProps;
+import com.willydupreez.prototype.config.test.MissingFieldProperties;
+import com.willydupreez.prototype.config.test.MissingFileProperties;
+import com.willydupreez.prototype.config.test.NoConstructorProperties;
+import com.willydupreez.prototype.config.test.UnsupportedTypeProperties;
+
 public class DefaultPropertiesFactoryTest {
 
 	private PropertiesFactory factory;
 
 	@Before
 	public void before() {
-		factory = new DefaultPropertiesFactory(TestTools.getResourceDirectory());
+		factory = new PathBasedPropertiesFactory(TestTools.getResourceDirectory());
 	}
 
 	@Test

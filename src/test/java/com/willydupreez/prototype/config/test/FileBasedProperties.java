@@ -1,4 +1,4 @@
-package com.willydupreez.prototype.config;
+package com.willydupreez.prototype.config.test;
 
 import java.util.List;
 

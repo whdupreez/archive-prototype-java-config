@@ -10,11 +10,25 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class DefaultPropertiesFactory implements PropertiesFactory {
+/**
+ * Loads properties from file in a specified {@link Path}. The
+ * file names are derived from the fully qualified class name
+ * of the properties bean, e.g. a properties bean class:
+ *
+ * <pre>com.abc.DbConnProperties</pre>
+ *
+ * will result in properties being loaded from the following file:
+ *
+ * <pre>com.abc.db_conn.properties</pre>
+ *
+ * @author Willy du Preez
+ *
+ */
+public class PathBasedPropertiesFactory implements PropertiesFactory {
 
 	private Path etc;
 
-	public DefaultPropertiesFactory(String etcPath) {
+	public PathBasedPropertiesFactory(String etcPath) {
 		etc = Paths.get(etcPath);
 	}
 
