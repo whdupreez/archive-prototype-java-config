@@ -8,15 +8,15 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.willydupreez.prototype.config.test.DefaultTestProperties;
-import com.willydupreez.prototype.config.test.FileBasedProperties;
-import com.willydupreez.prototype.config.test.InvalidNameProps;
-import com.willydupreez.prototype.config.test.MissingFieldProperties;
-import com.willydupreez.prototype.config.test.MissingFileProperties;
-import com.willydupreez.prototype.config.test.NoConstructorProperties;
-import com.willydupreez.prototype.config.test.UnsupportedTypeProperties;
+import com.willydupreez.prototype.config.testprops.DefaultTestProperties;
+import com.willydupreez.prototype.config.testprops.FileBasedProperties;
+import com.willydupreez.prototype.config.testprops.InvalidNameProps;
+import com.willydupreez.prototype.config.testprops.MissingFieldProperties;
+import com.willydupreez.prototype.config.testprops.MissingFileProperties;
+import com.willydupreez.prototype.config.testprops.NoConstructorProperties;
+import com.willydupreez.prototype.config.testprops.UnsupportedTypeProperties;
 
-public class DefaultPropertiesFactoryTest {
+public class PathBasedPropertiesFactoryTest {
 
 	private PropertiesFactory factory;
 

@@ -14,13 +14,20 @@ import org.junit.rules.ExpectedException;
 
 public class MapPropertyProviderTest {
 
-	private static final String KEY_ONE = "provider.map.one";
-	private static final String VAL_ONE = "one_val";
+	public static final String KEY_ONE = "provider.map.one";
+	public static final String VAL_ONE = "one_val";
 
-	private static final String KEY_TWO = "provider.map.two";
-	private static final String VAL_TWO = "one_val";
+	public static final String KEY_TWO = "provider.map.two";
+	public static final String VAL_TWO = "one_val";
 
-	private static final String NO_SUCH_KEY = "provider.map.noSuchKey";
+	public static final String NO_SUCH_KEY = "provider.map.noSuchKey";
+
+	public static Map<String, String> testProperties() {
+		Map<String, String> testProperties = new HashMap<>();
+		testProperties.put(KEY_ONE, VAL_ONE);
+		testProperties.put(KEY_TWO, VAL_TWO);
+		return testProperties;
+	}
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
@@ -30,10 +37,7 @@ public class MapPropertyProviderTest {
 
 	@Before
 	public void before() {
-		this.testProperties = new HashMap<>();
-		this.testProperties.put(KEY_ONE, VAL_ONE);
-		this.testProperties.put(KEY_TWO, VAL_TWO);
-
+		this.testProperties = testProperties();
 		this.provider = new MapPropertyProvider(testProperties);
 	}
 
