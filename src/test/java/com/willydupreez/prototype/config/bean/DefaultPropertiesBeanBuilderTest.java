@@ -12,10 +12,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.willydupreez.prototype.config.bean.DefaultPropertiesBeanBuilder;
+import com.willydupreez.prototype.config.provider.JavaPropertyProvider;
 import com.willydupreez.prototype.config.provider.MapPropertyProvider;
 import com.willydupreez.prototype.config.provider.PropertyProvider;
-import com.willydupreez.prototype.config.provider.SystemPropertyProvider;
 import com.willydupreez.prototype.config.testprops.DefaultTestProperties;
 
 public class DefaultPropertiesBeanBuilderTest {
@@ -31,7 +30,7 @@ public class DefaultPropertiesBeanBuilderTest {
 		mapProperties.put("property.one", "map_one");
 		mapProperties.put("property.two", "map_two");
 
-		propertyProviders = Arrays.asList(new SystemPropertyProvider(), new MapPropertyProvider(mapProperties));
+		propertyProviders = Arrays.asList(new JavaPropertyProvider(), new MapPropertyProvider(mapProperties));
 	}
 
 	@After

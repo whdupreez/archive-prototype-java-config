@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SystemPropertyProviderTest {
+public class JavaPropertyProviderTest {
 
 	private static final String KEY = "system.prop.test";
 	private static final String VALUE = "systemValue";
@@ -23,8 +23,8 @@ public class SystemPropertyProviderTest {
 	}
 
 	@Test
-	public void testSystemPropertyProvider() {
-		SystemPropertyProvider provider = new SystemPropertyProvider();
+	public void testJavaPropertyProvider() {
+		JavaPropertyProvider provider = new JavaPropertyProvider();
 		assertThat(provider.getProperty(KEY).get(), is(VALUE));
 		assertThat(provider.getProperty("non.existent").isPresent(), is(false));
 	}

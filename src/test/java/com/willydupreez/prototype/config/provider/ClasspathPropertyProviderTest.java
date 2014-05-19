@@ -11,7 +11,7 @@ public class ClasspathPropertyProviderTest {
 
 	@Test
 	public void before() {
-		ClasspathPropertyProvider provider = ClasspathPropertyProvider.from(LOCATION);
+		ClasspathPropertyProvider provider = new ClasspathPropertyProvider(LOCATION);
 
 		assertThat(provider.getProperty("cp.test.one").get(), is("1"));
 		assertThat(provider.getProperty("cp.test.two").get(), is("2"));

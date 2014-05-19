@@ -1,26 +1,21 @@
 package com.willydupreez.prototype.config.provider;
 
-import java.util.Optional;
-
-import com.willydupreez.prototype.config.ConfigurationException;
+import java.util.Map;
 
 /**
- * Provides properties using {@link System#getProperty(String)}.
- * Used to load properties provided using environment variables
- * or set using the -D option.
+ * Provides properties from system environment variables using
+ * {@link System#getenv()}.
+ *
+ * Note that these properties are not namespaced, and are
+ * therefore considered to be in the global namespace.
  *
  * @author Willy du Preez
  *
  */
-public class SystemPropertyProvider implements PropertyProvider {
+public class SystemPropertyProvider extends MapPropertyProvider {
 
-	@Override
-	public Optional<String> getProperty(String key) {
-		try {
-			return Optional.ofNullable(System.getProperty(key));
-		} catch (SecurityException e) {
-			throw new ConfigurationException("Cannot load system property: " + key, e);
-		}
+	public SystemPropertyProvider(Map<String, String> properties) {
+		super(System.getenv());
 	}
 
 }
