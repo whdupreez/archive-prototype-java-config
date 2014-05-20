@@ -1,6 +1,5 @@
 package com.willydupreez.prototype.config.provider;
 
-import java.util.Map;
 
 /**
  * Provides properties from system environment variables using
@@ -14,7 +13,7 @@ import java.util.Map;
  */
 public class SystemPropertyProvider extends MapPropertyProvider {
 
-	public SystemPropertyProvider(Map<String, String> properties) {
+	public SystemPropertyProvider() {
 		super(System.getenv());
 	}
 

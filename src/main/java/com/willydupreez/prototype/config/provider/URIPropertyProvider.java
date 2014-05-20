@@ -1,23 +1,18 @@
 package com.willydupreez.prototype.config.provider;
 
+import static com.willydupreez.prototype.config.util.Resources.asPropertiesMap;
+import static com.willydupreez.prototype.config.util.Resources.fromUri;
+
 import java.net.URI;
-import java.net.URL;
 
-import com.willydupreez.prototype.config.ConfigurationException;
+public class URIPropertyProvider extends MapPropertyProvider {
 
-public class URIPropertyProvider extends URLPropertyProvider {
-
-	private static URL toURL(URI uri) {
-		try {
-			return uri.toURL();
-		} catch (Exception e) {
-			throw new ConfigurationException(
-					"Failed to create provider from URI: " + uri.toString(), e);
-		}
+	public URIPropertyProvider(String uri) {
+		super(asPropertiesMap(fromUri(uri)));
 	}
 
 	public URIPropertyProvider(URI uri) {
-		super(toURL(uri));
+		super(asPropertiesMap(fromUri(uri)));
 	}
 
 }

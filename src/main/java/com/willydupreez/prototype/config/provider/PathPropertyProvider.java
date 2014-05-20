@@ -1,5 +1,8 @@
 package com.willydupreez.prototype.config.provider;
 
+import static com.willydupreez.prototype.config.util.Resources.asPropertiesMap;
+import static com.willydupreez.prototype.config.util.Resources.fromPath;
+
 import java.nio.file.Path;
 
 /**
@@ -10,8 +13,12 @@ import java.nio.file.Path;
  */
 public class PathPropertyProvider extends MapPropertyProvider {
 
+	public PathPropertyProvider(String path) {
+		super(asPropertiesMap(fromPath(path)));
+	}
+
 	public PathPropertyProvider(Path path) {
-		super(PropertiesUtils.fromPath(path));
+		super(asPropertiesMap(fromPath(path)));
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.willydupreez.prototype.config.provider;
 
+import com.willydupreez.prototype.config.util.Resources;
+
 /**
  * Provides Java properties supplied using the -D environment
  * or set using {@link System#setProperty(String, String)} or
@@ -14,7 +16,7 @@ package com.willydupreez.prototype.config.provider;
 public class JavaPropertyProvider extends MapPropertyProvider {
 
 	public JavaPropertyProvider() {
-		super(PropertiesUtils.convertToMap(System.getProperties()));
+		super(Resources.asPropertiesMap(System.getProperties()));
 	}
 
 }
