@@ -1,24 +1,42 @@
 package com.willydupreez.prototype.config.bean;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
+import static java.util.Arrays.asList;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.willydupreez.prototype.config.ConfigurationException;
+import com.willydupreez.prototype.config.convert.BooleanConverter;
+import com.willydupreez.prototype.config.convert.IntegerConverter;
+import com.willydupreez.prototype.config.convert.LongConverter;
+import com.willydupreez.prototype.config.convert.StringConverter;
+import com.willydupreez.prototype.config.convert.TypeConverter;
 import com.willydupreez.prototype.config.provider.PropertyProvider;
+import com.willydupreez.prototype.config.util.Beans;
 
 public class DefaultPropertiesBeanBuilder implements PropertiesBeanBuilder {
+
+	private final List<TypeConverter<?>> typeConverters;
+
+	public DefaultPropertiesBeanBuilder() {
+		this(asList(
+				new StringConverter(),
+				new BooleanConverter(),
+				new IntegerConverter(),
+				new LongConverter()));
+	}
+
+	public DefaultPropertiesBeanBuilder(List<TypeConverter<?>> typeConverters) {
+		this.typeConverters = typeConverters;
+	}
 
 	@Override
 	public <T> T buildPropertiesBean(Class<T> propertiesBeanType, List<PropertyProvider> providers) {
 		try {
 			T propertiesBean = propertiesBeanType.newInstance();
-			List<PropertyDescriptor> descriptors = descriptors(propertiesBeanType);
+			List<PropertyDescriptor> descriptors = Beans.descriptors(propertiesBeanType);
 			setBeanValues(propertiesBean, descriptors, providers);
 			return propertiesBean;
 		} catch (Exception e) {
@@ -36,22 +54,6 @@ public class DefaultPropertiesBeanBuilder implements PropertiesBeanBuilder {
 				descriptor.getWriteMethod().invoke(propertiesBean, value);
 			}
 		}
-	}
-
-	private List<PropertyDescriptor> descriptors(Class<?> propertiesBeanType) throws Exception {
-		BeanInfo propertiesBeanInfo = Introspector.getBeanInfo(propertiesBeanType);
-		return Arrays.asList(propertiesBeanInfo.getPropertyDescriptors()).stream()
-				.filter(descriptor -> isReadable(descriptor))
-				.filter(descriptor -> isWritable(descriptor))
-				.collect(Collectors.toList());
-	}
-
-	private boolean isReadable(PropertyDescriptor descriptor) {
-		return descriptor.getReadMethod() != null;
-	}
-
-	private boolean isWritable(PropertyDescriptor descriptor) {
-		return descriptor.getWriteMethod() != null;
 	}
 
 	private String toPropertyKey(String propertyMethodName) {
