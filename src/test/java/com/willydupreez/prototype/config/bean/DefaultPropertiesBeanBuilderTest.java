@@ -24,11 +24,21 @@ public class DefaultPropertiesBeanBuilderTest {
 	@Before
 	public void before() {
 
-		System.setProperty("property.two", "system_two");
-
 		Map<String, String> mapProperties = new HashMap<>();
-		mapProperties.put("property.one", "map_one");
-		mapProperties.put("property.two", "map_two");
+		mapProperties.put("propertyOne", "map_one");
+		mapProperties.put("propertyTwo", "map_two");
+
+		mapProperties.put("propertyFour", "44");
+		mapProperties.put("propertyFive", "55");
+
+		mapProperties.put("propertySix", "66");
+		mapProperties.put("propertySeven", "77");
+
+		mapProperties.put("propertyEight", "true");
+		mapProperties.put("propertyNine", "true");
+
+		// Overrides.
+		System.setProperty("propertyTwo", "system_two");
 
 		propertyProviders = Arrays.asList(new JavaPropertyProvider(), new MapPropertyProvider(mapProperties));
 	}
@@ -46,6 +56,12 @@ public class DefaultPropertiesBeanBuilderTest {
 		assertThat(properties.getPropertyOne(), is("map_one"));
 		assertThat(properties.getPropertyTwo(), is("system_two"));
 		assertThat(properties.getPropertyThree(), is("dtThree"));
+		assertThat(properties.getPropertyFour(), is(44));
+		assertThat(properties.getPropertyFive(), is(55));
+		assertThat(properties.getPropertySix(), is(66L));
+		assertThat(properties.getPropertySeven(), is(77L));
+		assertThat(properties.getPropertyEight(), is(true));
+		assertThat(properties.isPropertyNine(), is(true));
 	}
 
 }

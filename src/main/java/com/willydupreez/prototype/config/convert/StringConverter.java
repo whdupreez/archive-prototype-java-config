@@ -7,4 +7,9 @@ public class StringConverter implements TypeConverter<String> {
 		return property;
 	}
 
+	@Override
+	public Class<String> getType() {
+		return String.class;
+	}
+
 }

@@ -11,4 +11,9 @@ public class IntegerConverter implements TypeConverter<Integer> {
 		}
 	}
 
+	@Override
+	public Class<Integer> getType() {
+		return Integer.class;
+	}
+
 }

@@ -17,4 +17,11 @@ public interface TypeConverter<T> {
 	 */
 	T convertToType(String property);
 
+	/**
+	 * The Class type that the converter converts to.
+	 *
+	 * @return the class type
+	 */
+	Class<T> getType();
+
 }
